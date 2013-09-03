@@ -45,22 +45,29 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
+    },
+    showAlert: function (message, title) {
+        if (navigator.notification) {
+            navigator.notification.alert(message, null, title, 'OK');
+        } else {
+            alert(title ? (title + ": " + message) : message);
+        }
+    },
 };
 
-function getMap(){
-    var map;
-    initialize(map);
-    google.maps.event.addDomListener(window, 'load', initialize);
-}
-
-function initialize(map) {
-    var mapOptions = {
-        zoom: 8,
-        center: new google.maps.LatLng(-34.397, 150.644),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
-}
-
+//function getMap(){
+//    var map;
+//    initialize(map);
+//    google.maps.event.addDomListener(window, 'load', initialize);
+//}
+//
+//function initialize(map) {
+//    var mapOptions = {
+//        zoom: 8,
+//        center: new google.maps.LatLng(-34.397, 150.644),
+//        mapTypeId: google.maps.MapTypeId.ROADMAP
+//    };
+//    map = new google.maps.Map(document.getElementById('map-canvas'),
+//        mapOptions);
+//}
+//
