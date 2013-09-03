@@ -31,7 +31,7 @@
             <div class="viewNavigator_header"><h1>Playa</h1></div>
             <div id="content">
                 <ul class="mainMenu">
-                    <li>Activities</li>
+                    <a href="calendar.html"><li>Activities</li></a>
                     <li>Restaurants</li>
                     <li>Accomodation</li>
                     <a href="map.html"><li>Discover</li></a>
@@ -45,7 +45,7 @@
             $(document).ready( function() {
 
                 rootView =  { title: "Rotten Tomatoes",
-                    view:  $("<div id='rootView'><div class='activityIndicator'></div></div>")
+                    view:  $
                 };
 
                 window.viewNavigator = new ViewNavigator( 'body' );
