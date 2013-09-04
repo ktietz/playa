@@ -1,18 +1,5 @@
 var app = {
 
-    findByName: function() {
-        console.log('findByName');
-        this.store.findByName($('.search-key').val(), function(employees) {
-            var l = employees.length;
-            var e;
-            $('.employee-list').empty();
-            for (var i=0; i<l; i++) {
-                e = employees[i];
-                $('.employee-list').append('<li><a href="#employees/' + e.id + '">' + e.firstName + ' ' + e.lastName + '</a></li>');
-            }
-        });
-    },
-
     registerEvents: function() {
         var self = this;
         // Check of browser supports touch events...
@@ -35,6 +22,8 @@ var app = {
         }
 
         $(window).on('hashchange', $.proxy(this.route, this));
+
+
     },
 
     slidePage: function(page) {
@@ -88,7 +77,7 @@ var app = {
             }
             return;
         }
-        var match = hash.match(app.detailsURL);
+        var match = hash.match(app.activitiesURL);
         if (match){
             self.slidePage(new ActivitiesView().render());
             $('#calendar').fullCalendar({
@@ -98,12 +87,25 @@ var app = {
                 }
             });
         }
-    },
+        else if (hash.match(app.discoverURL)) {
+            // render the view
+            view = new DiscoverView().render();
 
+            // create and add the script that calls google maps asychronously
+            var script = document.createElement("script");
+            script.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=initialize";
+            document.body.appendChild(script);
+
+            // call slidepage
+            self.slidePage(view);
+        }
+    },
 
     initialize: function() {
         var self = this;
+
         self.activitiesURL = /^#activities/;
+        self.discoverURL = /^#discover/;
         self.registerEvents();
         self.route();
     }
