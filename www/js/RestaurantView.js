@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var ItemView = function() {
+var RestaurantView = function() {
 
     this.initialize = function() {
         this.el = $('<div/>');
@@ -21,11 +21,9 @@ var ItemView = function() {
         var id = hash.substr(hash.lastIndexOf("/") + 1);
         //get the restaurant that has that ID
         var restaurant = $.grep(restaurants, function(e){ return e.id == id; });
-
         // generate the template
         var parsedTemplate;
 
-//        pageTemplate = _.template(this.restoPageTemplate);
         parsedTemplate = parseTemplate(restaurant[0])
 
         this.el.html(parsedTemplate);
@@ -43,16 +41,15 @@ var ItemView = function() {
         return JSON.stringify(restaurants);
     },
 
-
     this.initialize();
 }
 
-ItemView.restoPageTemplate = _.template($('#restaurant-page-tpl').html());
+RestaurantView.restoPageTemplate = _.template($('#restaurant-page-tpl').html());
 
 function getHash() {
     return window.location.hash;
 }
 
 function parseTemplate(template) {
-    return ItemView.restoPageTemplate(template);
+    return RestaurantView.restoPageTemplate(template);
 }

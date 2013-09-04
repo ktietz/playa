@@ -16,9 +16,9 @@
         <ul class="mainMenu">
             <a href="#activities"><li>Activities</li></a>
             <a href="#restaurants"><li>Restaurants</li></a>
-            <li>Accomodation</li>
+            <a href="#accomodations"><li>Accomodations</li></a>
             <a href="#discover"><li>Discover</li></a>
-            <li>Attractions</li>
+            <a href="#attractions"><li>Attractions</li></a>
         </ul>
     </div>
 </script>
@@ -54,6 +54,34 @@
     <%= address %>
 </script>
 
+<script id="accomodations-tpl" type="text/template">
+    <header>Accomodations</header>
+    <ul class="accomodationsList"></ul>
+</script>
+
+<script id="accomodation-li-tpl" type="text/template">
+    <li><a href="#accomodations/<%= id %>"><%= name %></br>Address:<%= address %></a></li>
+</script>
+
+<script id="accomodation-page-tpl" type="text/template">
+    <header><%= name %></header>
+    <%= address %>
+</script>
+
+<script id="attractions-tpl" type="text/template">
+    <header>Attractions</header>
+    <ul class="attractionsList"></ul>
+</script>
+
+<script id="attraction-li-tpl" type="text/template">
+    <li><a href="#attractions/<%= id %>"><%= name %></br>Address:<%= address %></a></li>
+</script>
+
+<script id="attraction-page-tpl" type="text/template">
+    <header><%= name %></header>
+    <%= address %>
+</script>
+
 
 <script src="./lib/jquery-1.8.2.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -64,7 +92,11 @@
 <script src="js/ActivitiesView.js"></script>
 <script src="js/DiscoverView.js"></script>
 <script src="js/RestaurantsView.js"></script>
-<script src="js/ItemView.js"></script>
+<script src="js/RestaurantView.js"></script>
+<script src="js/AccomodationsView.js"></script>
+<script src="js/AccomodationView.js"></script>
+<script src="js/AttractionsView.js"></script>
+<script src="js/AttractionView.js"></script>
 <script src="./js/main.js"></script>
 
 <script>

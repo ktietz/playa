@@ -100,7 +100,7 @@ var app = {
         }
         else if (hash.match(app.restaurantPageURL)) {
             // render the view
-            view = new ItemView().render();
+            view = new RestaurantView().render();
 
             // call slidepage
             self.slidePage(view);
@@ -124,6 +124,58 @@ var app = {
                 $('ul.restaurantList').append(parsedTemplate);
             });
         }
+        else if (hash.match(app.accomodationsPageURL)) {
+            // render the view
+            view = new AccomodationView().render();
+
+            // call slidepage
+            self.slidePage(view);
+
+        }
+        else if (hash.match(app.accomodationsURL)) {
+            // render the view
+            view = new AccomodationsView().render();
+
+            // call slidepage
+            self.slidePage(view);
+            var accomodations = JSON.parse(view.generateData());
+            var parsedTemplate;
+
+            // add the hotels to the list
+            templateText = $('#accomodation-li-tpl').html();
+            listTemplate = _.template(templateText);
+
+            $.each(accomodations, function(index, r){
+                parsedTemplate = listTemplate(r);
+                $('ul.accomodationsList').append(parsedTemplate);
+            });
+        }
+        else if (hash.match(app.attractionsPageURL)) {
+            // render the view
+            view = new AttractionView().render();
+
+            // call slidepage
+            self.slidePage(view);
+
+        }
+        else if (hash.match(app.attractionsURL)) {
+            // render the view
+            view = new AttractionsView().render();
+
+            // call slidepage
+            self.slidePage(view);
+            var attractions = JSON.parse(view.generateData());
+            var parsedTemplate;
+
+            // add the hotels to the list
+            templateText = $('#attraction-li-tpl').html();
+            listTemplate = _.template(templateText);
+
+            $.each(attractions, function(index, r){
+                parsedTemplate = listTemplate(r);
+                $('ul.attractionsList').append(parsedTemplate);
+            });
+        }
     },
 
     initialize: function() {
@@ -132,6 +184,10 @@ var app = {
         self.discoverURL = /^#discover/;
         self.restaurantsURL = /^#restaurants/;
         self.restaurantPageURL = /^#restaurants\/(\d{1,})/;
+        self.accomodationsURL = /^#accomodations/;
+        self.accomodationsPageURL = /^#accomodations\/(\d{1,})/;
+        self.attractionsURL = /^#attractions/;
+        self.attractionsPageURL = /^#attractions\/(\d{1,})/;
         self.registerEvents();
         self.route();
     }
