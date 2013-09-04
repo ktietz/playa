@@ -1,5 +1,4 @@
 var app = {
-
     registerEvents: function() {
         var self = this;
         // Check of browser supports touch events...
@@ -99,13 +98,40 @@ var app = {
             // call slidepage
             self.slidePage(view);
         }
+        else if (hash.match(app.restaurantPageURL)) {
+            // render the view
+            view = new ItemView().render();
+
+            // call slidepage
+            self.slidePage(view);
+
+        }
+        else if (hash.match(app.restaurantsURL)) {
+            // render the view
+            view = new RestaurantsView().render();
+
+            // call slidepage
+            self.slidePage(view);
+            var restaurants = JSON.parse(view.generateData());
+            var parsedTemplate;
+
+            // add the restaurants to the list
+            templateText = $('#restaurant-li-tpl').html();
+            listTemplate = _.template(templateText);
+
+            $.each(restaurants, function(index, r){
+                parsedTemplate = listTemplate(r);
+                $('ul.restaurantList').append(parsedTemplate);
+            });
+        }
     },
 
     initialize: function() {
         var self = this;
-
         self.activitiesURL = /^#activities/;
         self.discoverURL = /^#discover/;
+        self.restaurantsURL = /^#restaurants/;
+        self.restaurantPageURL = /^#restaurants\/(\d{1,})/;
         self.registerEvents();
         self.route();
     }

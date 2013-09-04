@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script type="text/javascript" src="js/underscore.js"></script>
+
     <!--<script type='text/javascript' src='js/jquery-1.7.1.js'></script>-->
     <link rel="stylesheet" href="css/index.css"/>
     <title>Playa</title>
@@ -13,16 +15,13 @@
     <div class="scroll">
         <ul class="mainMenu">
             <a href="#activities"><li>Activities</li></a>
-            <li>Restaurants</li>
+            <a href="#restaurants"><li>Restaurants</li></a>
             <li>Accomodation</li>
-            <a href="#discover">
-                <li>Discover</li>
-            </a>
+            <a href="#discover"><li>Discover</li></a>
             <li>Attractions</li>
         </ul>
     </div>
 </script>
-
 
 <script id="activities-tpl" type="text/template">
     <header>Activities</header>
@@ -41,16 +40,31 @@
     <div id="map-canvas"></div>
 </script>
 
+<script id="restaurants-tpl" type="text/template">
+    <header>Restaurants</header>
+    <ul class="restaurantList"></ul>
+</script>
+
+<script id="restaurant-li-tpl" type="text/template">
+    <li><a href="#restaurants/<%= id %>"><%= name %></br>Address:<%= address %></a></li>
+</script>
+
+<script id="restaurant-page-tpl" type="text/template">
+    <header><%= name %></header>
+    <%= address %>
+</script>
+
 
 <script src="./lib/jquery-1.8.2.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type='text/javascript' src='./fullcalendar/fullcalendar.js'></script>
 <script type='text/javascript' src='./fullcalendar/gcal.js'></script>
 <link rel='stylesheet' type='text/css' href='./fullcalendar/fullcalendar.css' />
-<script type="text/javascript" src="js/underscore-min.js"></script>
 <script src="js/HomeView.js"></script>
 <script src="js/ActivitiesView.js"></script>
 <script src="js/DiscoverView.js"></script>
+<script src="js/RestaurantsView.js"></script>
+<script src="js/ItemView.js"></script>
 <script src="./js/main.js"></script>
 
 <script>
