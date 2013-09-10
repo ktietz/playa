@@ -1,4 +1,7 @@
 var app = {
+    'levelsDeep': 0, // To keep track of how far into the application structure you are and go back to where you were before.
+    'pageHistory': new Array(10), // Make the page history limit at 10 levels deep.
+
     registerEvents: function() {
         var self = this;
         // Check of browser supports touch events...
@@ -20,15 +23,16 @@ var app = {
             });
         }
 
+        // check if the url has a hash on the end. The "route" function depends on this
         $(window).on('hashchange', $.proxy(this.route, this));
 
 
     },
 
+    // TODO: make this work with pages at more than one level deep
     slidePage: function(page) {
 
-        var currentPageDest,
-            self = this;
+        var currentPageDest, self = this;
 
         // If there is no current page (app just started) -> No transition: Position new page in the view port
         if (!this.currentPage) {
@@ -38,18 +42,40 @@ var app = {
             return;
         }
 
-        // Cleaning up: remove old pages that were moved out of the viewport
-        $('.stage-right, .stage-left').not('.homePage').remove();
+        // Record the page you're leaving in the pageHistory so you can refer back to it later.
+        this.pageHistory[this.levelsDeep] = this.currentPage.getViewName();
 
-        if (page === app.homePage) {
-            // Always apply a Back transition (slide from left) when we go back to the search page
+        // Cleaning up: remove old pages that were moved out of the viewport
+//        $('.stage-right, .stage-left').not('.homePage').remove();
+
+        // See if the destination page is the same as the one you were at before.
+        var previousPage;
+        if (this.levelsDeep >= 1) {
+            previousPage = this.pageHistory[this.levelsDeep - 1].getViewName();
+        }
+        if (page === previousPage) {
+            // Apply a back transition
             $(page.el).attr('class', 'page stage-left');
             currentPageDest = "stage-right";
+            // You are going back one level. Decrement levelsDeep.
+            this.levelsDeep--;
         } else {
             // Forward transition (slide from right)
             $(page.el).attr('class', 'page stage-right');
             currentPageDest = "stage-left";
+            // You are going deeper into the application structure, increment levelsDeep
+            this.levelsDeep++;
         }
+
+//        if (page === app.homePage) {
+//            // Always apply a Back transition (slide from left) when we go back to the search page
+//            $(page.el).attr('class', 'page stage-left');
+//            currentPageDest = "stage-right";
+//        } else {
+//            // Forward transition (slide from right)
+//            $(page.el).attr('class', 'page stage-right');
+//            currentPageDest = "stage-left";
+//        }
 
         $('body').append(page.el);
 
@@ -62,7 +88,10 @@ var app = {
             self.currentPage = page;
         });
 
+//        this.levelsDeep++;
+
     },
+
 
     route: function() {
         var self = this;
@@ -76,6 +105,8 @@ var app = {
             }
             return;
         }
+
+        //TODO: Make this prettier by using a select statement or something
         var match = hash.match(app.activitiesURL);
         if (match){
             self.slidePage(new ActivitiesView().render());
@@ -152,7 +183,7 @@ var app = {
         }
         else if (hash.match(app.attractionsPageURL)) {
             // render the view
-            view = new AttractionView().render();
+            var view = new AttractionView().render();
 
             // call slidepage
             self.slidePage(view);

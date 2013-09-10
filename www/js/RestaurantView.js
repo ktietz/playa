@@ -10,7 +10,7 @@ var RestaurantView = function() {
 
     this.initialize = function() {
         this.el = $('<div/>');
-    },
+    };
 
     this.render = function() {
 
@@ -28,7 +28,7 @@ var RestaurantView = function() {
 
         this.el.html(parsedTemplate);
         return this;
-    },
+    };
 
     this.generateData = function() {
         var restaurants = [
@@ -39,7 +39,13 @@ var RestaurantView = function() {
         ];
 
         return JSON.stringify(restaurants);
-    },
+    };
+    // TODO: refer to the getViewName function like this in all of the Views
+    this.getViewName = getViewName;
+    function getViewName() {
+        var name = 'RestaurantView';
+        return name;
+    };
 
     this.initialize();
 }

@@ -13,11 +13,17 @@ var HomeView = function() {
 //        this.el.on('keyup', '.search-key', this.findByName);
     };
 
-
     this.render = function() {
         $(this.el).html(homeTemplate());
         return this;
-    },
+    };
+
+    this.getViewName = getViewName;
+
+    function getViewName() {
+        var name = 'HomeView';
+        return name;
+    };
 
     this.initialize();
 

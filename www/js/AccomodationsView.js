@@ -16,7 +16,7 @@ var AccomodationsView = function() {
     this.render = function() {
         this.el.html(accomodationsTemplate());
         return this;
-    },
+    };
 
     this.generateData = function() {
         var accomodations = [
@@ -27,7 +27,12 @@ var AccomodationsView = function() {
         ];
 
         return JSON.stringify(accomodations);
-    },
+    };
+
+    this.getViewName = function() {
+        var name = 'AccomodationsView';
+        return name;
+    };
 
     this.initialize();
 }

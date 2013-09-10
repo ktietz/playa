@@ -16,7 +16,7 @@ var ActivitiesView = function() {
         $(this.el).html(activitiesTemplate());
 //        this.calendar();
         return this;
-    },
+    };
 
     this.calendar = function() {
         $('#calendar').fullCalendar({
@@ -25,11 +25,16 @@ var ActivitiesView = function() {
                 className: 'gcal-event'           // an option
             }
         });
-    },
+    };
+
+    this.getViewName = function() {
+        var name = 'ActivitiesView';
+        return name;
+    };
 
     this.changeView = function(view) {
         $('#calendar').fullCalendar( 'changeView', view );
-    },
+    };
 
     this.initialize();
 }

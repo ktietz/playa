@@ -16,8 +16,12 @@ var DiscoverView = function() {
         $(this.el).html(discoverTemplate());
 
         return this;
-    },
+    };
 
+    this.getViewName = function() {
+        var name = 'DiscoverView';
+        return name;
+    };
 
     this.initialize();
 }

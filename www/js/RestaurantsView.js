@@ -16,7 +16,7 @@ var RestaurantsView = function() {
     this.render = function() {
         this.el.html(restaurantsTemplate());
         return this;
-    },
+    };
 
     this.generateData = function() {
         var restaurants = [
@@ -27,7 +27,14 @@ var RestaurantsView = function() {
         ];
 
         return JSON.stringify(restaurants);
-    },
+    };
+
+    this.getViewName = getViewName;
+
+    function getViewName() {
+        var name = 'RestaurantsView';
+        return name;
+    };
 
     this.initialize();
 }

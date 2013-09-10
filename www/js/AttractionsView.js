@@ -16,7 +16,7 @@ var AttractionsView = function() {
     this.render = function() {
         this.el.html(attractionsTemplate());
         return this;
-    },
+    };
 
     this.generateData = function() {
         var attractions = [
@@ -27,7 +27,12 @@ var AttractionsView = function() {
         ];
 
         return JSON.stringify(attractions);
-    },
+    };
+
+    this.getViewName = function() {
+        var name = 'AttractionsView';
+        return name;
+    };
 
     this.initialize();
 }
