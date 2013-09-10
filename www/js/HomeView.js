@@ -6,6 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 var HomeView = function() {
+    'use strict';
 
     this.initialize = function() {
         // Define a div wrapper for the view. The div wrapper is used to attach events.
@@ -18,17 +19,12 @@ var HomeView = function() {
         return this;
     };
 
-    this.getViewName = getViewName;
-
-    function getViewName() {
+    this.getViewName = function() {
         var name = 'HomeView';
         return name;
     };
 
     this.initialize();
+};
 
-
-
-}
-
-homeTemplate = _.template($('#home-tpl').html());
+var homeTemplate = _.template($('#home-tpl').html());

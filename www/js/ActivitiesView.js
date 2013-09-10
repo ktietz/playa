@@ -6,14 +6,14 @@
  * To change this template use File | Settings | File Templates.
  */
 var ActivitiesView = function() {
-
+    'use strict';
     this.initialize = function() {
         // Define a div wrapper for the view. The div wrapper is used to attach events.
         this.el = $('<div/>');
     };
 
     this.render = function() {
-        $(this.el).html(activitiesTemplate());
+        $(this.el).html(activitiesTemplate);
 //        this.calendar();
         return this;
     };
@@ -37,6 +37,6 @@ var ActivitiesView = function() {
     };
 
     this.initialize();
-}
+};
 
-activitiesTemplate = _.template($('#activities-tpl').html());
+var activitiesTemplate = _.template($('#activities-tpl').html());

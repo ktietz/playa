@@ -7,6 +7,7 @@
  */
 
 var AttractionsView = function() {
+    'use strict';
 
     this.initialize = function() {
         // Define a div wrapper for the view. The div wrapper is used to attach events.
@@ -14,7 +15,7 @@ var AttractionsView = function() {
     };
 
     this.render = function() {
-        this.el.html(attractionsTemplate());
+        this.el.html(attractionsTemplate);
         return this;
     };
 
@@ -35,6 +36,6 @@ var AttractionsView = function() {
     };
 
     this.initialize();
-}
+};
 
-attractionsTemplate = _.template($('#attractions-tpl').html());
+var attractionsTemplate = _.template($('#attractions-tpl').html());

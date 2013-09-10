@@ -7,13 +7,14 @@
  */
 
 var RestaurantView = function() {
+    'use strict';
 
     this.initialize = function() {
         this.el = $('<div/>');
     };
 
     this.render = function() {
-
+//        'use strict';
         var restaurants = JSON.parse(this.generateData());
 
         // get the id from the url
@@ -24,7 +25,7 @@ var RestaurantView = function() {
         // generate the template
         var parsedTemplate;
 
-        parsedTemplate = parseTemplate(restaurant[0])
+        parsedTemplate = parseTemplate(restaurant[0]);
 
         this.el.html(parsedTemplate);
         return this;
@@ -41,14 +42,15 @@ var RestaurantView = function() {
         return JSON.stringify(restaurants);
     };
     // TODO: refer to the getViewName function like this in all of the Views
-    this.getViewName = getViewName;
-    function getViewName() {
+//    this.getViewName = getViewName;
+    this.getViewName = function() {
         var name = 'RestaurantView';
         return name;
     };
 
     this.initialize();
-}
+
+};
 
 RestaurantView.restoPageTemplate = _.template($('#restaurant-page-tpl').html());
 

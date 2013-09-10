@@ -7,6 +7,7 @@
  */
 
 var RestaurantsView = function() {
+    'use strict';
 
     this.initialize = function() {
         // Define a div wrapper for the view. The div wrapper is used to attach events.
@@ -14,8 +15,12 @@ var RestaurantsView = function() {
     };
 
     this.render = function() {
-        this.el.html(restaurantsTemplate());
+        this.el.html(restaurantsTemplate);
         return this;
+    };
+
+    this.restaurantsTemplate = function(){
+//        return template;
     };
 
     this.generateData = function() {
@@ -29,14 +34,16 @@ var RestaurantsView = function() {
         return JSON.stringify(restaurants);
     };
 
-    this.getViewName = getViewName;
+//    this.getViewName = getViewName;
 
-    function getViewName() {
+    this.getViewName = function() {
         var name = 'RestaurantsView';
         return name;
     };
 
     this.initialize();
-}
+};
 
-restaurantsTemplate = _.template($('#restaurants-tpl').html());
+var restaurantsTemplate = _.template($('#restaurants-tpl').html());
+
+

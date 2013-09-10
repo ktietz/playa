@@ -21,6 +21,9 @@ var app = {
             $('body').on('mouseup', 'a', function(event) {
                 $(event.target).removeClass('tappable-active');
             });
+            $('#back').on('click', function() {
+                this.pageHistory[this.levelsDeep - 1];
+            });
         }
 
         // check if the url has a hash on the end. The "route" function depends on this
@@ -51,9 +54,9 @@ var app = {
         // See if the destination page is the same as the one you were at before.
         var previousPage;
         if (this.levelsDeep >= 1) {
-            previousPage = this.pageHistory[this.levelsDeep - 1].getViewName();
+            previousPage = this.pageHistory[this.levelsDeep - 1];
         }
-        if (page === previousPage) {
+        if (page.getViewName() === previousPage) {
             // Apply a back transition
             $(page.el).attr('class', 'page stage-left');
             currentPageDest = "stage-right";
@@ -95,6 +98,7 @@ var app = {
 
     route: function() {
         var self = this;
+        var view;
         var hash = window.location.hash;
         if (!hash) {
             if (this.homePage) {
@@ -147,8 +151,8 @@ var app = {
             var parsedTemplate;
 
             // add the restaurants to the list
-            templateText = $('#restaurant-li-tpl').html();
-            listTemplate = _.template(templateText);
+            var templateText = $('#restaurant-li-tpl').html();
+            var listTemplate = _.template(templateText);
 
             $.each(restaurants, function(index, r){
                 parsedTemplate = listTemplate(r);
@@ -183,11 +187,10 @@ var app = {
         }
         else if (hash.match(app.attractionsPageURL)) {
             // render the view
-            var view = new AttractionView().render();
+            view = new AttractionView().render();
 
             // call slidepage
             self.slidePage(view);
-
         }
         else if (hash.match(app.attractionsURL)) {
             // render the view

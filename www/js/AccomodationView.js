@@ -7,7 +7,7 @@
  */
 
 var AccomodationView = function() {
-
+    'use strict';
     this.initialize = function() {
         this.el = $('<div/>');
     };
@@ -47,7 +47,7 @@ var AccomodationView = function() {
     };
 
     this.initialize();
-}
+};
 
 AccomodationView.restoPageTemplate = _.template($('#accomodation-page-tpl').html());
 

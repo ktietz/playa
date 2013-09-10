@@ -7,6 +7,7 @@
  */
 
 var AccomodationsView = function() {
+    'use strict';
 
     this.initialize = function() {
         // Define a div wrapper for the view. The div wrapper is used to attach events.
@@ -35,6 +36,6 @@ var AccomodationsView = function() {
     };
 
     this.initialize();
-}
+};
 
-accomodationsTemplate = _.template($('#accomodations-tpl').html());
+var accomodationsTemplate = _.template($('#accomodations-tpl').html());

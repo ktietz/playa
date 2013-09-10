@@ -10,6 +10,8 @@
 <body>
 
 
+
+<!--Templates of pages ------------------------------------------------------->
 <script id="home-tpl" type="text/template">
     <header>Playa</header>
     <div class="scroll">
@@ -24,7 +26,7 @@
 </script>
 
 <script id="activities-tpl" type="text/template">
-    <header>Activities</header>
+    <header><div id="back">Back</div>Activities</header>
     <div id="content">
         <div id="calendar"></div>
         <ul id="views">
@@ -108,8 +110,7 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-                mapOptions);
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     }
 
 </script>

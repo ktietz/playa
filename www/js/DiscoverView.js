@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 var DiscoverView = function() {
-
+    'use strict';
     this.initialize = function() {
         // Define a div wrapper for the view. The div wrapper is used to attach events.
         this.el = $('<div/>');
@@ -14,7 +14,6 @@ var DiscoverView = function() {
 
     this.render = function() {
         $(this.el).html(discoverTemplate());
-
         return this;
     };
 
@@ -24,6 +23,6 @@ var DiscoverView = function() {
     };
 
     this.initialize();
-}
+};
 
-discoverTemplate = _.template($('#discover-tpl').html());
+var discoverTemplate = _.template($('#discover-tpl').html());

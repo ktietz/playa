@@ -7,6 +7,7 @@
  */
 
 var AttractionView = function() {
+    'use strict';
 
     this.initialize = function() {
         this.el = $('<div/>');
@@ -47,7 +48,7 @@ var AttractionView = function() {
     };
 
     this.initialize();
-}
+};
 
 AttractionView.restoPageTemplate = _.template($('#attraction-page-tpl').html());
 
