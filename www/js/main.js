@@ -4,35 +4,31 @@ var app = {
 
     registerEvents: function() {
         var self = this;
+        var $body = $('body');
         // Check of browser supports touch events...
         if (document.documentElement.hasOwnProperty('ontouchstart')) {
             // ... if yes: register touch event listener to change the "selected" state of the item
-            $('body').on('touchstart', 'a', function(event) {
+            $body.on('touchstart', 'a', function(event) {
                 $(event.target).addClass('tappable-active');
             });
-            $('body').on('touchend', 'a', function(event) {
+            $body.on('touchend', 'a', function(event) {
                 $(event.target).removeClass('tappable-active');
             });
         } else {
             // ... if not: register mouse events instead
-            $('body').on('mousedown', 'a', function(event) {
+            $body.on('mousedown', 'a', function(event) {
                 $(event.target).addClass('tappable-active');
             });
-            $('body').on('mouseup', 'a', function(event) {
+            $body.on('mouseup', 'a', function(event) {
                 $(event.target).removeClass('tappable-active');
             });
-            $('#back').on('click', function() {
-                this.pageHistory[this.levelsDeep - 1];
-            });
+
         }
 
         // check if the url has a hash on the end. The "route" function depends on this
         $(window).on('hashchange', $.proxy(this.route, this));
-
-
     },
 
-    // TODO: make this work with pages at more than one level deep
     slidePage: function(page) {
 
         var currentPageDest, self = this;
@@ -46,17 +42,17 @@ var app = {
         }
 
         // Record the page you're leaving in the pageHistory so you can refer back to it later.
-        this.pageHistory[this.levelsDeep] = this.currentPage.getViewName();
+        this.pageHistory[this.levelsDeep] = this.currentPage;
 
         // Cleaning up: remove old pages that were moved out of the viewport
-//        $('.stage-right, .stage-left').not('.homePage').remove();
+        $('.stage-right, .stage-left').not('.homePage').remove();
 
         // See if the destination page is the same as the one you were at before.
         var previousPage;
         if (this.levelsDeep >= 1) {
             previousPage = this.pageHistory[this.levelsDeep - 1];
         }
-        if (page.getViewName() === previousPage) {
+        if ((previousPage !== undefined) && (page.getViewName() === previousPage.getViewName())) {
             // Apply a back transition
             $(page.el).attr('class', 'page stage-left');
             currentPageDest = "stage-right";
@@ -79,7 +75,7 @@ var app = {
 //            $(page.el).attr('class', 'page stage-right');
 //            currentPageDest = "stage-left";
 //        }
-
+        // TODO: Make ('body') an app-wide variable sinec it's always reused
         $('body').append(page.el);
 
         // Wait until the new page has been added to the DOM...
@@ -100,7 +96,7 @@ var app = {
         var self = this;
         var view;
         var hash = window.location.hash;
-        if (!hash) {
+        if ((!hash) || (hash.match(app.homeURL))){
             if (this.homePage) {
                 this.slidePage(this.homePage);
             } else {
@@ -114,12 +110,20 @@ var app = {
         var match = hash.match(app.activitiesURL);
         if (match){
             self.slidePage(new ActivitiesView().render());
-            $('#calendar').fullCalendar({
-                events: {
-                    url: 'https://www.google.com/calendar/feeds/j8uud3mfqe41th5pgojpefeht4%40group.calendar.google.com/public/basic',
-                    className: 'gcal-event'           // an option
-                }
-            });
+            var $calendarDiv = $('#calendar');
+            if ($calendarDiv.length > 0){
+                $calendarDiv.fullCalendar({
+                    events: {
+                        url: 'https://www.google.com/calendar/feeds/j8uud3mfqe41th5pgojpefeht4%40group.calendar.google.com/public/basic',
+                        className: 'gcal-event'           // an option
+                    }
+                });
+                console.log('main.js 121, calendar div exists');
+
+            }
+            else{
+                console.log('main.js 125, Calendar div doesnt exist');
+            }
         }
         else if (hash.match(app.discoverURL)) {
             // render the view
@@ -158,6 +162,7 @@ var app = {
                 parsedTemplate = listTemplate(r);
                 $('ul.restaurantList').append(parsedTemplate);
             });
+
         }
         else if (hash.match(app.accomodationsPageURL)) {
             // render the view
@@ -210,18 +215,31 @@ var app = {
                 $('ul.attractionsList').append(parsedTemplate);
             });
         }
+
+        var $backDiv = $('.back');
+        if ($backDiv.length > 0){
+            $backDiv.on('click', function() {
+                console.log('Back Clicked');
+//                self.slidePage(self.pageHistory[self.levelsDeep - 1]);
+                window.location.hash = self.pageHistory[self.levelsDeep - 1].getViewName();
+            });
+        }
+        else {
+            console.log('Back div doesnt exist');
+        }
     },
 
     initialize: function() {
         var self = this;
-        self.activitiesURL = /^#activities/;
-        self.discoverURL = /^#discover/;
-        self.restaurantsURL = /^#restaurants/;
-        self.restaurantPageURL = /^#restaurants\/(\d{1,})/;
-        self.accomodationsURL = /^#accomodations/;
-        self.accomodationsPageURL = /^#accomodations\/(\d{1,})/;
-        self.attractionsURL = /^#attractions/;
-        self.attractionsPageURL = /^#attractions\/(\d{1,})/;
+        self.homeURL = /^#HomeView/;
+        self.activitiesURL = /^#ActivitiesView/;
+        self.discoverURL = /^#DiscoverView/;
+        self.restaurantsURL = /^#RestaurantsView/;
+        self.restaurantPageURL = /^#RestaurantView\/(\d{1,})/;
+        self.accomodationsURL = /^#AccomodationsView/;
+        self.accomodationsPageURL = /^#AccomodationView\/(\d{1,})/;
+        self.attractionsURL = /^#AttractionsView/;
+        self.attractionsPageURL = /^#AttractionView\/(\d{1,})/;
         self.registerEvents();
         self.route();
     }

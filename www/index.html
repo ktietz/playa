@@ -16,17 +16,17 @@
     <header>Playa</header>
     <div class="scroll">
         <ul class="mainMenu">
-            <a href="#activities"><li>Activities</li></a>
-            <a href="#restaurants"><li>Restaurants</li></a>
-            <a href="#accomodations"><li>Accomodations</li></a>
-            <a href="#discover"><li>Discover</li></a>
-            <a href="#attractions"><li>Attractions</li></a>
+            <a href="#ActivitiesView"><li>Activities</li></a>
+            <a href="#RestaurantsView"><li>Restaurants</li></a>
+            <a href="#AccomodationsView"><li>Accomodations</li></a>
+            <a href="#DiscoverView"><li>Discover</li></a>
+            <a href="#AttractionsView"><li>Attractions</li></a>
         </ul>
     </div>
 </script>
 
 <script id="activities-tpl" type="text/template">
-    <header><div id="back">Back</div>Activities</header>
+    <header><div class="back">Back</div>Activities</header>
     <div id="content">
         <div id="calendar"></div>
         <ul id="views">
@@ -38,49 +38,49 @@
 </script>
 
 <script id="discover-tpl" type="text/template">
-    <header>Discover</header>
+    <header><div class="back">Back</div>Discover</header>
     <div id="map-canvas"></div>
 </script>
 
 <script id="restaurants-tpl" type="text/template">
-    <header>Restaurants</header>
+    <header><div class="back">Back</div>Restaurants</header>
     <ul class="restaurantList"></ul>
 </script>
 
 <script id="restaurant-li-tpl" type="text/template">
-    <li><a href="#restaurants/<%= id %>"><%= name %></br>Address:<%= address %></a></li>
+    <li><a href="#RestaurantView/<%= id %>"><%= name %></br>Address:<%= address %></a></li>
 </script>
 
 <script id="restaurant-page-tpl" type="text/template">
-    <header><%= name %></header>
+    <header><div class="back">Back</div><%= name %></header>
     <%= address %>
 </script>
 
 <script id="accomodations-tpl" type="text/template">
-    <header>Accomodations</header>
+    <header><div class="back">Back</div>Accomodations</header>
     <ul class="accomodationsList"></ul>
 </script>
 
 <script id="accomodation-li-tpl" type="text/template">
-    <li><a href="#accomodations/<%= id %>"><%= name %></br>Address:<%= address %></a></li>
+    <li><a href="#AccomodationView/<%= id %>"><%= name %></br>Address:<%= address %></a></li>
 </script>
 
 <script id="accomodation-page-tpl" type="text/template">
-    <header><%= name %></header>
+    <header><div class="back">Back</div><%= name %></header>
     <%= address %>
 </script>
 
 <script id="attractions-tpl" type="text/template">
-    <header>Attractions</header>
+    <header><div class="back">Back</div>Attractions</header>
     <ul class="attractionsList"></ul>
 </script>
 
 <script id="attraction-li-tpl" type="text/template">
-    <li><a href="#attractions/<%= id %>"><%= name %></br>Address:<%= address %></a></li>
+    <li><a href="#AttractionView/<%= id %>"><%= name %></br>Address:<%= address %></a></li>
 </script>
 
 <script id="attraction-page-tpl" type="text/template">
-    <header><%= name %></header>
+    <header><div class="back">Back</div><%= name %></header>
     <%= address %>
 </script>
 
