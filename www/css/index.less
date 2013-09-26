@@ -122,33 +122,6 @@ h1 {
 
 
 
-// Main styles --------------------------------------
-.mainMenu{
-    padding: 0;
-
-a{
-  text-decoration: none;
-  color: #000;
-}
-    li{
-      list-style: none;
-      border-bottom: 1px solid #aaa;
-      font-size: 16pt;
-      padding: 1em 0 1em 0;
-      background-color: #eee;
-      text-align: center;
-      width: 100%;
-    }
-}
-
-.back{
-  display: block;
-  height: 4em;
-  width: 10em;
-  background-color: #ccc;
-  text-align: center;
-}
-
 html, body, #map-canvas {
   margin: 0;
   padding: 0;
@@ -157,8 +130,8 @@ html, body, #map-canvas {
 
 .scroll {
   overflow: auto;
-//  -webkit-overflow-scrolling: touch;
-  position: absolute;
+  //  -webkit-overflow-scrolling: touch;
+//  position: absolute;
   top: 84px;
   bottom: 0px;
   left: 0px;
@@ -195,3 +168,183 @@ li>a.tappable-active {
   -webkit-transition-duration: .375s;
   -o-transition-duration: .375s;
 }
+
+
+// Clearfix ----------------------------------------
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+
+// Variables --------------------------------------
+@themeColor1: #c3ced1;
+@themeColor2: #009ec2;
+@themeColor3: #143b54;
+@themeColor4: #006d8e;
+@themeColor5: #efefef;
+
+@headerColor: @themeColor1;
+@textColor: #575757;
+
+@itemTitle: 2em;
+@itemInfo: 1em;
+
+
+// Main styles --------------------------------------
+body {
+  font-size: 16px;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+}
+
+
+header{
+  color: @headerColor;
+  text-align: center;
+  padding: 0.3em 0 0.3em 0;
+  font-size: 2em;
+  min-height: 1.3em;
+  background-color: @themeColor4;
+  .back{
+    position: absolute;
+    left: 20px;
+    top: 14px;
+    img{
+      height: 1em;
+    }
+  }
+  .themeColor1{
+    color: @themeColor1;
+  }
+  .themeColor2{
+    color: @themeColor2;
+  }
+  .themeColor3{
+    color: @themeColor3;
+  }
+}
+
+// the main list items
+ul {
+  margin: 0;
+  padding: 0;
+  li{
+    list-style: none;
+    border-bottom: 1px solid #ddd;
+    padding: 0.6em 0 0.6em 0.6em;
+    margin: 0;
+    background-color: #efefef;
+    width: 100%;
+  }
+}
+
+
+.mainMenu{
+  padding: 0;
+  margin: 0;
+
+  a{
+    text-decoration: none;
+    color: #575757;
+  }
+
+  // the main list items
+  li{
+    font-size: 1.5em;
+  }
+
+  .menuItemLogo{
+    width: 1em;
+    height: 1em;
+    margin-right: 0.7em;
+  }
+}
+
+.itemList {
+  a {
+    color: @textColor;
+    text-decoration: none;
+  }
+
+  .logo{
+    float: left;
+    width: 30%;
+    margin-top: 0.3em;
+    img{
+      width: 100%;
+//      max-width: 7em;
+      margin-left: -0.7em; // Make the logo flush with the side
+    }
+  }
+
+  .itemInfo {
+    width: 70%;
+    float: left;
+    font-size: @itemInfo;
+    vertical-align: middle;
+
+    .itemName {
+      font-size: @itemTitle;
+      margin: 0 0 0.3em 0;
+    }
+
+    .infoPiece {
+      margin: 0 0 0.5em 1.1em;
+    }
+
+    img{
+      max-width: 1.3em;
+      max-height: 1.3em;
+//      max-height: 1.3em;
+      margin: 0 0.7em -0.1em 0;
+    }
+  }
+}
+
+.itemView{
+  .logo{
+    float: left;
+    width: 30%;
+    img{
+      width: 100%;
+    }
+  }
+
+
+  .itemInfo {
+    width: 70%;
+    float: left;
+    font-size: @itemInfo;
+    vertical-align: middle;
+
+    .itemName {
+      font-size: @itemTitle;
+      margin: 0 0 0.3em 0;
+    }
+
+    .infoPiece {
+      margin: 0 0 0.5em 1.1em;
+    }
+
+    img{
+      max-width: 1.3em;
+      max-height: 1.3em;
+      //      max-height: 1.3em;
+      margin: 0 0.7em -0.1em 0;
+    }
+  }
+}
+
+
+
+
+

@@ -25,13 +25,34 @@ var RestaurantsView = function() {
 
     this.generateData = function() {
         var restaurants = [
-            {"id": 1, "name": "Guacamole Palace", "address": "1234 Billy Road"},
-            {"id": 2, "name": "Salsa King", "address": "1234 Salsa Road"},
-            {"id": 3, "name": "Burger King", "address": "1234 Ancient Road"},
-            {"id": 4, "name": "3 Amigos", "address": "1234 John Road"}
+            {"id": 1,
+                "name": "Brochetas",
+                "address": "28 NTE between Mamita's beach and 1a. Ave. Aldea Thai. 77710, Playa del carmen, Quintana Roo",
+                "phone": "01 984 803 2566",
+                "email": "info@brochetas.com.mx",
+                "website": "brochetas.com.mx"
+            }
         ];
 
         return JSON.stringify(restaurants);
+    };
+
+    this.getData = function() {
+        var url = "http://dev.karltietz.com/data/getData.php";
+
+        $.ajax({
+            dataType: 'jsonp',
+            data: 'id=10',
+            jsonp: 'jsonp_callback',
+            url: url,
+            success: function ( data ) {
+                // fill the list. Pass the data, the html source of the template and the ul to put the list in.
+                fillList(data, $('#restaurant-li-tpl'), $('ul.restaurantList'));
+            },
+            failure: function () {
+                console.log("Ajax error could not get restaurants data.");
+            }
+        });
     };
 
 //    this.getViewName = getViewName;

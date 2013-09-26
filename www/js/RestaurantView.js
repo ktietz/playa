@@ -14,33 +14,51 @@ var RestaurantView = function() {
     };
 
     this.render = function() {
+        var myself = this;
 //        'use strict';
-        var restaurants = JSON.parse(this.generateData());
+        var url = "http://dev.karltietz.com/data/getData.php";
+        var restaurant;
+        $.ajax({
+            dataType: 'jsonp',
+            data: 'id=10',
+            jsonp: 'jsonp_callback',
+            url: url,
+            success: function ( data ) {
+                // get the id from the url
+                var hash = getHash();
+                var id = hash.substr(hash.lastIndexOf("/") + 1);
+                //get the restaurant that has that ID
+                restaurant = $.grep(data, function(e){ return e.id == id; });
 
-        // get the id from the url
-        var hash = getHash();
-        var id = hash.substr(hash.lastIndexOf("/") + 1);
-        //get the restaurant that has that ID
-        var restaurant = $.grep(restaurants, function(e){ return e.id == id; });
-        // generate the template
-        var parsedTemplate;
+                if (typeof restaurant !== "undefined") {
+                    // generate the template
+                    var parsedTemplate;
 
-        parsedTemplate = parseTemplate(restaurant[0]);
+                    parsedTemplate = parseRestaurantTemplate(restaurant[0]);
 
-        this.el.html(parsedTemplate);
+                    myself.el.html(parsedTemplate);
+                }
+                else {
+                    console.log ("Variable restaurant is undefined.")
+                }
+
+                bindEvents();
+            },
+            failure: function () {
+                console.log("Ajax error could not get restaurant data.");
+            }
+        });
+
+
+
         return this;
+
     };
 
-    this.generateData = function() {
-        var restaurants = [
-            {"id": 1, "name": "Guacamole Palace", "address": "1234 Billy Road"},
-            {"id": 2, "name": "Salsa King", "address": "1234 Salsa Road"},
-            {"id": 3, "name": "Burger King", "address": "1234 Ancient Road"},
-            {"id": 4, "name": "3 Amigos", "address": "1234 John Road"}
-        ];
+//    this.getData = function(id) {
+//
+//    }
 
-        return JSON.stringify(restaurants);
-    };
     // TODO: refer to the getViewName function like this in all of the Views
 //    this.getViewName = getViewName;
     this.getViewName = function() {
@@ -58,6 +76,24 @@ function getHash() {
     return window.location.hash;
 }
 
-function parseTemplate(template) {
+// TODO: make sure either this function is universal for all views or make it have a specific name to this view because otherwise it won't work right.
+function parseRestaurantTemplate(template) {
     return RestaurantView.restoPageTemplate(template);
+}
+
+function bindEvents() {
+    var $backDiv = $('.back');
+    if ($backDiv.length > 0){
+        $backDiv.on('click', function() {
+            console.log('Back Clicked');
+//                self.slidePage(self.pageHistory[self.levelsDeep - 1]);
+            // TODO: in this context it can't read pageHistory and levelsDeep variables anymore. MAke them accessible to this function.
+            window.location.hash = self.pageHistory[self.levelsDeep - 1].getViewName();
+        });
+
+    }
+    else {
+        console.log('Back div doesnt exist');
+    }
+
 }

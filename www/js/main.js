@@ -52,6 +52,7 @@ var app = {
         if (this.levelsDeep >= 1) {
             previousPage = this.pageHistory[this.levelsDeep - 1];
         }
+        console.log("Previous page: " + previousPage);
         if ((previousPage !== undefined) && (page.getViewName() === previousPage.getViewName())) {
             // Apply a back transition
             $(page.el).attr('class', 'page stage-left');
@@ -75,7 +76,7 @@ var app = {
 //            $(page.el).attr('class', 'page stage-right');
 //            currentPageDest = "stage-left";
 //        }
-        // TODO: Make ('body') an app-wide variable sinec it's always reused
+        // TODO: Make ('body') an app-wide variable since it's always reused
         $('body').append(page.el);
 
         // Wait until the new page has been added to the DOM...
@@ -88,7 +89,6 @@ var app = {
         });
 
 //        this.levelsDeep++;
-
     },
 
 
@@ -149,20 +149,13 @@ var app = {
             // render the view
             view = new RestaurantsView().render();
 
-            // call slidepage
-            self.slidePage(view);
-            var restaurants = JSON.parse(view.generateData());
+            var restaurants;
             var parsedTemplate;
 
-            // add the restaurants to the list
-            var templateText = $('#restaurant-li-tpl').html();
-            var listTemplate = _.template(templateText);
+            restaurants = view.getData();
 
-            $.each(restaurants, function(index, r){
-                parsedTemplate = listTemplate(r);
-                $('ul.restaurantList').append(parsedTemplate);
-            });
-
+            // call slidepage
+            self.slidePage(view);
         }
         else if (hash.match(app.accomodationsPageURL)) {
             // render the view
@@ -180,6 +173,8 @@ var app = {
             self.slidePage(view);
             var accomodations = JSON.parse(view.generateData());
             var parsedTemplate;
+            var templateText;
+            var listTemplate;
 
             // add the hotels to the list
             templateText = $('#accomodation-li-tpl').html();
@@ -216,17 +211,7 @@ var app = {
             });
         }
 
-        var $backDiv = $('.back');
-        if ($backDiv.length > 0){
-            $backDiv.on('click', function() {
-                console.log('Back Clicked');
-//                self.slidePage(self.pageHistory[self.levelsDeep - 1]);
-                window.location.hash = self.pageHistory[self.levelsDeep - 1].getViewName();
-            });
-        }
-        else {
-            console.log('Back div doesnt exist');
-        }
+
     },
 
     initialize: function() {
@@ -249,3 +234,43 @@ var app = {
 
 
 app.initialize();
+
+
+
+function fillRestaurantsList(restaurants) {
+    //create the necessary template ingredients
+    var templateText = $('#restaurant-li-tpl').html();
+    var listTemplate = _.template(templateText);
+
+    // TODO: Replace this with a javascript loop instead. Javascript is faster than jQuery
+    // Add the restaurants to the list
+    $.each(restaurants, function(index, r){
+        parsedTemplate = listTemplate(r);
+        $('ul.restaurantList').append(parsedTemplate);
+    });
+}
+
+function fillList(data, $template, $ul) {
+    var listTemplate = _.template($template.html());
+
+    // TODO: Replace this with a javascript loop instead. Javascript is faster than jQuery
+    // Add the restaurants to the list
+    $.each(data, function(index, r){
+        parsedTemplate = listTemplate(r);
+        $ul.append(parsedTemplate);
+    });
+}
+function bindBackButton(){
+    var $backDiv = $('div.back');
+    if ($backDiv.length > 0){
+        $backDiv.on('click', function() {
+            console.log('Back Clicked');
+//                self.slidePage(self.pageHistory[self.levelsDeep - 1]);
+            window.location.hash = self.pageHistory[self.levelsDeep - 1].getViewName();
+        });
+
+    }
+    else {
+        console.log('Back div doesnt exist');
+    }
+}

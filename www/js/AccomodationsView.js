@@ -21,10 +21,12 @@ var AccomodationsView = function() {
 
     this.generateData = function() {
         var accomodations = [
-            {"id": 1, "name": "Times Hotel", "address": "1234 Billy Road"},
-            {"id": 2, "name": "Ramada Inn", "address": "1234 Salsa Road"},
-            {"id": 3, "name": "Delta Hotel", "address": "1234 Ancient Road"},
-            {"id": 4, "name": "Days Inn", "address": "1234 John Road"}
+            {"id": 1, "name": "ViMex Vacation Rentals",
+                "phone": "US and Canada (Toll Free): (519) 342-6348",
+                "phone2": "Mexico: (984) 803-2231",
+                "website": "vimexvacationrentals.com",
+                "address": "Calle 12 between 15 and 20 Ave. Col. Centro, 77710, Playa del Carmen, Quintana Roo"
+            }
         ];
 
         return JSON.stringify(accomodations);

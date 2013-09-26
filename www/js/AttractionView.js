@@ -25,7 +25,7 @@ var AttractionView = function() {
         // generate the template
         var parsedTemplate;
 
-        parsedTemplate = parseTemplate(attraction[0]);
+        parsedTemplate = parseAttractionTemplate(attraction[0]);
 
         this.el.html(parsedTemplate);
         return this;
@@ -50,12 +50,12 @@ var AttractionView = function() {
     this.initialize();
 };
 
-AttractionView.restoPageTemplate = _.template($('#attraction-page-tpl').html());
+AttractionView.attrPageTemplate = _.template($('#attraction-page-tpl').html());
 
 function getHash() {
     return window.location.hash;
 }
 
-function parseTemplate(template) {
-    return AttractionView.restoPageTemplate(template);
+function parseAttractionTemplate(template) {
+    return AttractionView.attrPageTemplate(template);
 }

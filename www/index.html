@@ -4,6 +4,8 @@
     <script type="text/javascript" src="js/underscore.js"></script>
 
     <!--<script type='text/javascript' src='js/jquery-1.7.1.js'></script>-->
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <!--<link rel="stylesheet" href="css/bootstrap-responsive.css"/>-->
     <link rel="stylesheet" href="css/index.css"/>
     <title>Playa</title>
 </head>
@@ -13,20 +15,49 @@
 
 <!--Templates of pages ------------------------------------------------------->
 <script id="home-tpl" type="text/template">
-    <header>Playa</header>
+    <header><span class="themeColor1">the</span><span class="themeColor2">playa</span><span class="themeColor3">times</span></header>
     <div class="scroll">
         <ul class="mainMenu">
-            <a href="#ActivitiesView"><li>Activities</li></a>
-            <a href="#RestaurantsView"><li>Restaurants</li></a>
-            <a href="#AccomodationsView"><li>Accomodations</li></a>
-            <a href="#DiscoverView"><li>Discover</li></a>
-            <a href="#AttractionsView"><li>Attractions</li></a>
+            <a href="#ActivitiesView">
+                <li>
+                    <img src="img/soccerball.png" class="menuItemLogo" alt=""/>
+                    Activities & Events
+                </li>
+            </a>
+
+            <a href="#RestaurantsView">
+                <li>
+                    <img src="img/forkandknife.png" class="menuItemLogo" alt=""/>
+                    Restaurants
+                </li>
+            </a>
+
+            <a href="#AccomodationsView">
+                <li>
+                    <img src="img/accommodationsLogo.png" class="menuItemLogo" alt=""/>
+                    Accomodations
+                </li>
+            </a>
+
+            <a href="#DiscoverView">
+                <li>
+                    <img src="img/binoculars.png" class="menuItemLogo" alt=""/>
+                    Discover
+                </li>
+            </a>
+
+            <a href="#AttractionsView">
+                <li>
+                    <img src="img/attractionsLogo.png" class="menuItemLogo" alt=""/>
+                    Attractions
+                </li>
+            </a>
         </ul>
     </div>
 </script>
 
 <script id="activities-tpl" type="text/template">
-    <header><div class="back">Back</div>Activities</header>
+    <header><div class="back"><img src="img/backButton.png" alt="Back"/></div>Activities</header>
     <div id="content">
         <div id="calendar"></div>
         <ul id="views">
@@ -38,40 +69,72 @@
 </script>
 
 <script id="discover-tpl" type="text/template">
-    <header><div class="back">Back</div>Discover</header>
+    <header><div class="back"><img src="img/backButton.png" alt="Back"/></div>Discover</header>
     <div id="map-canvas"></div>
 </script>
 
+<!--// Restaurants and Bars page templates -------------------------------------------->
 <script id="restaurants-tpl" type="text/template">
-    <header><div class="back">Back</div>Restaurants</header>
-    <ul class="restaurantList"></ul>
+    <header><div class="back"><img src="img/backButton.png" alt="Back"/></div>Restaurants</header>
+    <ul class="restaurantList itemList"></ul>
 </script>
 
 <script id="restaurant-li-tpl" type="text/template">
-    <li><a href="#RestaurantView/<%= id %>"><%= name %></br>Address:<%= address %></a></li>
+    <li class="clearfix">
+        <a href="#RestaurantView/<%= id %>">
+            <div class="logo"><img src="img/<%= name %>.jpg" alt=""/></div>
+            <div class="itemInfo">
+                <div class="itemName"><%= name %></div>
+                <div class="infoPiece phone"><img src="img/phone.png" alt=""/><%= phone %></div>
+                <div class="infoPiece email"><img src="img/email.png" alt=""/><%= email %></div>
+                <div class="infoPiece website"><img src="img/web.png" alt=""/><%= website %></div>
+            </div>
+        </a>
+    </li>
 </script>
 
 <script id="restaurant-page-tpl" type="text/template">
-    <header><div class="back">Back</div><%= name %></header>
-    <%= address %>
+    <header><div class="back"><img src="img/backButton.png" alt="Back"/></div></header>
+    <div class="itemView">
+        <div class="itemInfo">
+            <div class="logo"><img src="img/<%= name %>.jpg" alt=""/></div>
+            <div class="itemName"><%= name %></div>
+            <div class="infoPiece phone"><img src="img/phone.png" alt=""/><%= phone %></div>
+            <div class="infoPiece email"><img src="img/email.png" alt=""/><%= email %></div>
+            <div class="infoPiece website"><img src="img/web.png" alt=""/><%= website %></div>
+
+        </div>
+    </div>
+
 </script>
 
+<!--// Accommodations page templates -------------------------------------------->
 <script id="accomodations-tpl" type="text/template">
-    <header><div class="back">Back</div>Accomodations</header>
-    <ul class="accomodationsList"></ul>
+    <header><div class="back"><img src="img/backButton.png" alt="Back"/></div>Accomodations</header>
+    <ul class="accomodationsList itemList"></ul>
 </script>
 
 <script id="accomodation-li-tpl" type="text/template">
-    <li><a href="#AccomodationView/<%= id %>"><%= name %></br>Address:<%= address %></a></li>
+    <li class="clearfix"><a href="#AccomodationView/<%= id %>">
+        <div class="logo"><img src="img/<%= name %>.jpg" alt=""/></div>
+
+        <div class="itemInfo">
+            <div class="itemName"><%= name %></div>
+            <div class="infoPiece phone"><img src="img/phone.png" alt=""/><%= phone %></div>
+            <div class="infoPiece phone"><img src="img/phone.png" alt=""/><%= phone2 %></div>
+            <div class="infoPiece website"><img src="img/web.png" alt=""/><%= website %></div>
+        </div>
+    </a></li>
+
 </script>
 
 <script id="accomodation-page-tpl" type="text/template">
-    <header><div class="back">Back</div><%= name %></header>
+    <header><div class="back"><img src="img/backButton.png" alt="Back"/></div><%= name %></header>
     <%= address %>
 </script>
 
 <script id="attractions-tpl" type="text/template">
-    <header><div class="back">Back</div>Attractions</header>
+    <header><div class="back"><img src="img/backButton.png" alt="Back"/></div>Attractions</header>
     <ul class="attractionsList"></ul>
 </script>
 
@@ -80,7 +143,7 @@
 </script>
 
 <script id="attraction-page-tpl" type="text/template">
-    <header><div class="back">Back</div><%= name %></header>
+    <header><div class="back"><img src="img/backButton.png" alt="Back"/></div><%= name %></header>
     <%= address %>
 </script>
 
@@ -90,6 +153,7 @@
 <script type='text/javascript' src='./fullcalendar/fullcalendar.js'></script>
 <script type='text/javascript' src='./fullcalendar/gcal.js'></script>
 <link rel='stylesheet' type='text/css' href='./fullcalendar/fullcalendar.css' />
+<!--<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 <script src="js/HomeView.js"></script>
 <script src="js/ActivitiesView.js"></script>
 <script src="js/DiscoverView.js"></script>
