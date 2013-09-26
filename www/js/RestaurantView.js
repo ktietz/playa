@@ -13,7 +13,7 @@ var RestaurantView = function() {
         this.el = $('<div/>');
     };
 
-    this.render = function() {
+    this.render = function(app) {
         var myself = this;
 //        'use strict';
         var url = "http://dev.karltietz.com/data/getData.php";
@@ -39,14 +39,17 @@ var RestaurantView = function() {
                     myself.el.html(parsedTemplate);
                 }
                 else {
-                    console.log ("Variable restaurant is undefined.")
+                    console.log ("Variable restaurant is undefined.");
                 }
 
-                bindEvents();
+                bindEvents(app);
             },
             failure: function () {
+                // TODO: Figure out how I want this to fail. Do I want the header to be made first and then go get the ajax stuff so the header still shows up even if the AJAX request fails? Or do I just want the page not to load at all if AJAX fails?
                 console.log("Ajax error could not get restaurant data.");
             }
+
+
         });
 
 
@@ -79,21 +82,4 @@ function getHash() {
 // TODO: make sure either this function is universal for all views or make it have a specific name to this view because otherwise it won't work right.
 function parseRestaurantTemplate(template) {
     return RestaurantView.restoPageTemplate(template);
-}
-
-function bindEvents() {
-    var $backDiv = $('.back');
-    if ($backDiv.length > 0){
-        $backDiv.on('click', function() {
-            console.log('Back Clicked');
-//                self.slidePage(self.pageHistory[self.levelsDeep - 1]);
-            // TODO: in this context it can't read pageHistory and levelsDeep variables anymore. MAke them accessible to this function.
-            window.location.hash = self.pageHistory[self.levelsDeep - 1].getViewName();
-        });
-
-    }
-    else {
-        console.log('Back div doesnt exist');
-    }
-
 }

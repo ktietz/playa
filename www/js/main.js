@@ -139,7 +139,7 @@ var app = {
         }
         else if (hash.match(app.restaurantPageURL)) {
             // render the view
-            view = new RestaurantView().render();
+            view = new RestaurantView().render(self);
 
             // call slidepage
             self.slidePage(view);
@@ -152,14 +152,14 @@ var app = {
             var restaurants;
             var parsedTemplate;
 
-            restaurants = view.getData();
+            restaurants = view.getData(app);
 
             // call slidepage
             self.slidePage(view);
         }
         else if (hash.match(app.accomodationsPageURL)) {
             // render the view
-            view = new AccomodationView().render();
+            view = new AccomodationView().render(app);
 
             // call slidepage
             self.slidePage(view);
@@ -167,7 +167,7 @@ var app = {
         }
         else if (hash.match(app.accomodationsURL)) {
             // render the view
-            view = new AccomodationsView().render();
+            view = new AccomodationsView().render(app);
 
             // call slidepage
             self.slidePage(view);
@@ -267,6 +267,22 @@ function bindBackButton(){
             console.log('Back Clicked');
 //                self.slidePage(self.pageHistory[self.levelsDeep - 1]);
             window.location.hash = self.pageHistory[self.levelsDeep - 1].getViewName();
+        });
+
+    }
+    else {
+        console.log('Back div doesnt exist');
+    }
+}
+
+function bindEvents(app) {
+    var $backDiv = $('.back');
+    if ($backDiv.length > 0){
+        $backDiv.on('click', function() {
+            console.log('Back Clicked');
+//                self.slidePage(self.pageHistory[self.levelsDeep - 1]);
+            // TODO: in this context it can't read pageHistory and levelsDeep variables anymore. MAke them accessible to this function.
+            window.location.hash = app.pageHistory[app.levelsDeep - 1].getViewName();
         });
 
     }

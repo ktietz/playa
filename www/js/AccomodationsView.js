@@ -14,8 +14,9 @@ var AccomodationsView = function() {
         this.el = $('<div/>');
     };
 
-    this.render = function() {
+    this.render = function(app) {
         this.el.html(accomodationsTemplate());
+//        bindEvents(app);
         return this;
     };
 

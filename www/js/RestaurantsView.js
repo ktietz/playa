@@ -14,8 +14,9 @@ var RestaurantsView = function() {
         this.el = $('<div/>');
     };
 
-    this.render = function() {
+    this.render = function(app) {
         this.el.html(restaurantsTemplate);
+
         return this;
     };
 
@@ -37,7 +38,7 @@ var RestaurantsView = function() {
         return JSON.stringify(restaurants);
     };
 
-    this.getData = function() {
+    this.getData = function(app) {
         var url = "http://dev.karltietz.com/data/getData.php";
 
         $.ajax({
@@ -48,6 +49,8 @@ var RestaurantsView = function() {
             success: function ( data ) {
                 // fill the list. Pass the data, the html source of the template and the ul to put the list in.
                 fillList(data, $('#restaurant-li-tpl'), $('ul.restaurantList'));
+                bindEvents(app);
+
             },
             failure: function () {
                 console.log("Ajax error could not get restaurants data.");
