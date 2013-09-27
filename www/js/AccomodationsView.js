@@ -14,9 +14,14 @@ var AccomodationsView = function() {
         this.el = $('<div/>');
     };
 
-    this.render = function(app) {
-        this.el.html(accomodationsTemplate());
-//        bindEvents(app);
+    this.render = function(callback) {
+        this.el.html(accomodationsTemplate);
+        if (callback && typeof(callback) === "function") {
+            callback();
+        }
+        else {
+            console.log("Callback is not a function.");
+        }
         return this;
     };
 

@@ -25,6 +25,17 @@ var app = {
 
         }
 
+//        var $backDiv = $('.back');
+        // TODO: This is not kosher. Don't use the alt text as its defining characteristic. Binding to the body is too broad. This is a temporary hack.
+            $body.on('click', function(event) {
+                if (event.target.alt === "Back") {
+                    console.log('Back Clicked');
+                    window.location.hash = app.pageHistory[app.levelsDeep - 1].getViewName();
+                }
+            });
+
+
+
         // check if the url has a hash on the end. The "route" function depends on this
         $(window).on('hashchange', $.proxy(this.route, this));
     },
@@ -152,14 +163,14 @@ var app = {
             var restaurants;
             var parsedTemplate;
 
-            restaurants = view.getData(app);
+            restaurants = view.getData(self);
 
             // call slidepage
             self.slidePage(view);
         }
         else if (hash.match(app.accomodationsPageURL)) {
             // render the view
-            view = new AccomodationView().render(app);
+            view = new AccomodationView().render();
 
             // call slidepage
             self.slidePage(view);
@@ -167,7 +178,7 @@ var app = {
         }
         else if (hash.match(app.accomodationsURL)) {
             // render the view
-            view = new AccomodationsView().render(app);
+            view = new AccomodationsView().render(function(){bindEvents(self);});
 
             // call slidepage
             self.slidePage(view);
@@ -252,15 +263,15 @@ function fillList(data, $template, $ul) {
 
 
 function bindEvents(app) {
-    var $backDiv = $('.back');
-    if ($backDiv.length > 0){
-        $backDiv.on('click', function() {
-            console.log('Back Clicked');
-            window.location.hash = app.pageHistory[app.levelsDeep - 1].getViewName();
-        });
-
-    }
-    else {
-        console.log('Back div doesnt exist');
-    }
+//    var $backDiv = $('.back');
+//    if ($backDiv.length > 0){
+//        $backDiv.on('click', function() {
+//            console.log('Back Clicked');
+//            window.location.hash = app.pageHistory[app.levelsDeep - 1].getViewName();
+//        });
+//
+//    }
+//    else {
+//        console.log('Back div doesnt exist');
+//    }
 }
