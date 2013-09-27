@@ -31,5 +31,5 @@ echo $_GET['jsonp_callback'] . '(' . $data . ');';
 
 
 function getDataAsJSON() {
-    return '[{"id":1,"name":"Brochetas","address":"28 NTE between Mamitas beach and 1a. Avse. Aldea Thai. 77710, Playa del carmen, Quintana Roo","phone":"01 984 803 2566","email":"info@brochetas.com.mx","website":"http://www.brochetas.com.mx"}]';
+    return '[{"id":1,"name":"Brochetas","address":"28 NTE between Mamitas beach and 1a. Avse. Aldea Thai. 77710, Playa del carmen, Quintana Roo","phone":"01 984 803 2566","email":"info@brochetas.com.mx","website":"brochetas.com.mx"}]';
 }

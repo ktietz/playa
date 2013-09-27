@@ -197,51 +197,51 @@ ul li {
 }
 .itemList .logo {
   float: left;
-  width: 30%;
-  margin-top: 0.3em;
+  width: 28%;
+  margin-top: 0.1em;
+  margin-left: -0.7em;
 }
 .itemList .logo img {
   width: 100%;
-  margin-left: -0.7em;
 }
 .itemList .itemInfo {
-  width: 70%;
+  width: 72%;
   float: left;
   font-size: 1em;
   vertical-align: middle;
 }
 .itemList .itemInfo .itemName {
   font-size: 2em;
-  margin: 0 0 0.3em 0;
+  margin: 0 0 0.3em 0.3em;
 }
 .itemList .itemInfo .infoPiece {
-  margin: 0 0 0.5em 1.1em;
+  margin: 0 0 0.5em 0.7em;
 }
 .itemList .itemInfo img {
   max-width: 1.3em;
   max-height: 1.3em;
-  margin: 0 0.7em -0.1em 0;
+  margin: 0 0.5em -0.1em 0;
 }
 .itemView .infoPiece {
   margin: 0 0 0.5em 1.1em;
 }
 .itemView .logo {
   float: left;
-  width: 30%;
+  width: 28%;
   max-width: 15em;
 }
 .itemView .logo img {
   width: 100%;
 }
 .itemView .itemInfo {
-  width: 70%;
+  width: 72%;
   float: left;
   font-size: 1em;
   vertical-align: middle;
 }
 .itemView .itemInfo .itemName {
   font-size: 2em;
-  margin: 0 0 0.3em 0.2em;
+  margin: 0 0 0.3em 0em;
 }
 .itemView .itemInfo img {
   max-width: 1.3em;
