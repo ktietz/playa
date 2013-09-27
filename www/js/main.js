@@ -228,8 +228,6 @@ var app = {
         self.registerEvents();
         self.route();
     }
-
-
 };
 
 
@@ -237,18 +235,9 @@ app.initialize();
 
 
 
-function fillRestaurantsList(restaurants) {
-    //create the necessary template ingredients
-    var templateText = $('#restaurant-li-tpl').html();
-    var listTemplate = _.template(templateText);
 
-    // TODO: Replace this with a javascript loop instead. Javascript is faster than jQuery
-    // Add the restaurants to the list
-    $.each(restaurants, function(index, r){
-        parsedTemplate = listTemplate(r);
-        $('ul.restaurantList').append(parsedTemplate);
-    });
-}
+// public functions -------------------------------------------------
+
 
 function fillList(data, $template, $ul) {
     var listTemplate = _.template($template.html());
@@ -260,28 +249,13 @@ function fillList(data, $template, $ul) {
         $ul.append(parsedTemplate);
     });
 }
-function bindBackButton(){
-    var $backDiv = $('div.back');
-    if ($backDiv.length > 0){
-        $backDiv.on('click', function() {
-            console.log('Back Clicked');
-//                self.slidePage(self.pageHistory[self.levelsDeep - 1]);
-            window.location.hash = self.pageHistory[self.levelsDeep - 1].getViewName();
-        });
 
-    }
-    else {
-        console.log('Back div doesnt exist');
-    }
-}
 
 function bindEvents(app) {
     var $backDiv = $('.back');
     if ($backDiv.length > 0){
         $backDiv.on('click', function() {
             console.log('Back Clicked');
-//                self.slidePage(self.pageHistory[self.levelsDeep - 1]);
-            // TODO: in this context it can't read pageHistory and levelsDeep variables anymore. MAke them accessible to this function.
             window.location.hash = app.pageHistory[app.levelsDeep - 1].getViewName();
         });
 

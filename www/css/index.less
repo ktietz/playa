@@ -311,9 +311,14 @@ ul {
 }
 
 .itemView{
+  .infoPiece {
+    margin: 0 0 0.5em 1.1em;
+  }
+
   .logo{
     float: left;
     width: 30%;
+    max-width: 15em;
     img{
       width: 100%;
     }
@@ -328,20 +333,29 @@ ul {
 
     .itemName {
       font-size: @itemTitle;
-      margin: 0 0 0.3em 0;
-    }
-
-    .infoPiece {
-      margin: 0 0 0.5em 1.1em;
+      margin: 0 0 0.3em 0.2em;
     }
 
     img{
       max-width: 1.3em;
       max-height: 1.3em;
-      //      max-height: 1.3em;
       margin: 0 0.7em -0.1em 0;
     }
   }
+
+  .address{
+    .description{
+      float: right;
+      width: 87%;
+    }
+    img{
+      float: left;
+      max-width: 1.7em;
+      max-height: 1.7em;
+      margin: 0 0.7em 0 0;
+    }
+  }
+
 }
 
 

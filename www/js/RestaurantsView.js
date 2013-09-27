@@ -14,7 +14,7 @@ var RestaurantsView = function() {
         this.el = $('<div/>');
     };
 
-    this.render = function(app) {
+    this.render = function() {
         this.el.html(restaurantsTemplate);
 
         return this;
