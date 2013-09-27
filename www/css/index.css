@@ -227,21 +227,21 @@ ul li {
 }
 .itemView .logo {
   float: left;
-  width: 28%;
+  width: 30%;
   max-width: 15em;
 }
 .itemView .logo img {
   width: 100%;
 }
 .itemView .itemInfo {
-  width: 72%;
+  width: 70%;
   float: left;
   font-size: 1em;
   vertical-align: middle;
 }
 .itemView .itemInfo .itemName {
   font-size: 2em;
-  margin: 0 0 0.3em 0em;
+  margin: 0 0 0.3em 0.3em;
 }
 .itemView .itemInfo img {
   max-width: 1.3em;
